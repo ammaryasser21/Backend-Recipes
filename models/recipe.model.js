@@ -3,47 +3,47 @@ const mongoose = require('mongoose');
 const recipeSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
-    trim: true
+    required: false,
+    trim: false
   },
   description: {
     type: String,
-    required: true
+    required: false
   },
   ingredients: [{
     name: {
       type: String,
-      required: true
+      required: false
     },
     amount: {
       type: Number,
-      required: true
+      required: false
     },
     unit: {
       type: String,
-      required: true
+      required: false
     }
   }],
   instructions: [{
     type: String,
-    required: true
+    required: false
   }],
   cookingTime: {
     type: Number,
-    required: true
+    required: false
   },
   servings: {
     type: Number,
-    required: true
+    required: false
   },
   difficulty: {
     type: String,
     enum: ['easy', 'medium', 'hard'],
-    required: true
+    required: false
   },
   cuisine: {
     type: String,
-    required: true
+    required: false
   },
   imageUrl: {
     type: String
@@ -51,7 +51,7 @@ const recipeSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false,
   },
   likes: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -93,3 +93,4 @@ const recipeSchema = new mongoose.Schema({
 recipeSchema.index({ title: 'text', description: 'text', cuisine: 'text' });
 
 module.exports = mongoose.model('Recipe', recipeSchema);
+

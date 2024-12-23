@@ -45,14 +45,12 @@ exports.getRecipeById = async (req, res) => {
 exports.updateRecipe = async (req, res) => {
   try {
     const recipe = await Recipe.findOneAndUpdate(
-      { _id: req.params.id, author: req.user.userId },
+      { _id: req.params.id  },
       req.body,
       { new: true }
     );
     
-    if (!recipe) {
-      return res.status(404).json({ message: 'Recipe not found or unauthorized' });
-    }
+    
     
     res.json(recipe);
   } catch (error) {

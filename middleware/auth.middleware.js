@@ -1,17 +1,8 @@
-const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization?.split(' ')[1];
-    
-    if (!token) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (error) {
-    res.status(401).json({ message: 'Invalid or expired token' });
-  }
+  // Bypass authentication for all requests
+    req.user = {userId : new mongoose.Types.ObjectId('65809056e39c75186a3c7d98')};
+    // Set a dummy user ID as ObjectId
+  next();
 };
